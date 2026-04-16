@@ -1,0 +1,56 @@
+{
+  "tickets": [
+    {
+      "story": "Necesito una función que calcule el factorial de un número",
+      "tasks": [
+        "Investigar y definir la fórmula matemática para calcular el factorial de un número.",
+        "Diseñar la estructura de la función que calculará el factorial, incluyendo parámetros de entrada y salida.",
+        "Crear una prueba unitaria para validar el cálculo del factorial con números positivos.",
+        "Implementar la función que calcule el factorial utilizando la fórmula definida.",
+        "Agregar validaciones para manejar entrada de números negativos y cero.",
+        "Crear una prueba unitaria para validar el manejo de números negativos y cero.",
+        "Integrar y probar la función completa con diferentes casos de uso."
+      ],
+      "tasks_review": "APROBADO",
+      "tasks_approved": true,
+      "tasks_attempts": 4,
+      "code": "```javascript\n/**\n * Calcula el factorial de un número entero no negativo.\n * \n * @param {number} n - El número entero no negativo.\n * @returns {number} El factorial del número.\n * @throws {Error} Si el número es negativo o no es un entero.\n */\nfunction factorial(n) {\n    if (!Number.isInteger(n)) {\n        throw new Error('El número debe ser un entero.');\n    }\n    if (n < 0) {\n        throw new Error('El número no puede ser negativo.');\n    }\n    if (n === 0 || n === 1) {\n        return 1;\n    }\n    return n * factorial(n - 1);\n}\n\n// Pruebas unitarias\ndescribe('Función factorial', () => {\n    it('Debería calcular el factorial de 5', () => {\n        expect(factorial(5)).toBe(120);\n    });\n    it('Debería calcular el factorial de 0', () => {\n        expect(factorial(0)).toBe(1);\n    });\n    it('Debería calcular el factorial de 1', () => {\n        expect(factorial(1)).toBe(1);\n    });\n    it('Debería lanzar un error para números negativos', () => {\n        expect(() => factorial(-1)).toThrowError('El número no puede ser negativo.');\n    });\n    it('Debería lanzar un error para números no enteros', () => {\n        expect(() => factorial(1.5)).toThrowError('El número debe ser un entero.');\n    });\n});\n\n// Pruebas de integración\ndescribe('Integración con otros componentes', () => {\n    it('Debería funcionar con números grandes', () => {\n        expect(factorial(20)).toBe(2432902008176640000);\n    });\n    it('Debería funcionar con números pequeños', () => {\n        expect(factorial(3)).toBe(6);\n    });\n});\n\n// Documentación de ejemplos de uso y casos de error comunes\n/**\n * Ejemplos de uso:\n * - factorial(5) devuelve 120\n * - factorial(0) devuelve 1\n * - factorial(1) devuelve 1\n * \n * Casos de error comunes:\n * - factorial(-1) lanza un error 'El número no puede ser negativo.'\n * - factorial(1.5) lanza un error 'El número debe ser un entero.'\n */\n```",
+      "review": "APROBADO",
+      "approved": true,
+      "review_attempts": 4,
+      "tests": "import { factorial } from './solution';\n\ndescribe('Función factorial', () => {\n    it('Debería calcular el factorial de 5', () => {\n        // Task: Investigar y definir la fórmula matemática para calcular el factorial de un número\n        // Task: Implementar la función que calcule el factorial utilizando la fórmula definida\n        expect(factorial(5)).toBe(120);\n    });\n\n    it('Debería calcular el factorial de 0', () => {\n        // Task: Agregar validaciones para manejar entrada de números negativos y cero\n        expect(factorial(0)).toBe(1);\n    });\n\n    it('Debería calcular el factorial de 1', () => {\n        // Task: Agregar validaciones para manejar entrada de números negativos y cero\n        expect(factorial(1)).toBe(1);\n    });\n\n    it('Debería lanzar un error para números negativos', () => {\n        // Task: Agregar validaciones para manejar entrada de números negativos y cero\n        expect(() => factorial(-1)).toThrow('El número no puede ser negativo.');\n    });\n\n    it('Debería lanzar un error para números no enteros', () => {\n        // Task: Agregar validaciones para manejar entrada de números negativos y cero\n        expect(() => factorial(1.5)).toThrow('El número debe ser un entero.');\n    });\n\n    it('Debería funcionar con números grandes', () => {\n        // Task: Integrar y probar la función completa con diferentes casos de uso\n        expect(factorial(20)).toBe(2432902008176640000);\n    });\n\n    it('Debería funcionar con números pequeños', () => {\n        // Task: Integrar y probar la función completa con diferentes casos de uso\n        expect(factorial(3)).toBe(6);\n    });\n});",
+      "tests_passed": true,
+      "tests_output": "\n> express-server@1.0.0 test\n> jest\n\nPASS ./solution.test.ts\n  Funci�n factorial\n    √ Deber�a calcular el factorial de 5 (2 ms)\n    √ Deber�a calcular el factorial de 0\n    √ Deber�a calcular el factorial de 1 (1 ms)\n    √ Deber�a lanzar un error para n�meros negativos (16 ms)\n    √ Deber�a lanzar un error para n�meros no enteros (1 ms)\n    √ Deber�a funcionar con n�meros grandes (1 ms)\n    √ Deber�a funcionar con n�meros peque�os\n\nTest Suites: 1 passed, 1 total\nTests:       7 passed, 7 total\nSnapshots:   0 total\nTime:        2.575 s\nRan all test suites.\n",
+      "qa_attempts": 4,
+      "server_path": "C:\\dev\\temp\\pipa\\server.ts",
+      "deployed": true,
+      "status": "completed"
+    },
+    {
+      "story": "Crear función que reciba un nombre como input y devuelva un saludo con el nombre incluido",
+      "tasks": [
+        "Definir la función con su nombre y parámetros de entrada",
+        "Crear una variable para almacenar el saludo con el nombre incluido",
+        "Implementar la lógica para concatenar el saludo con el nombre de entrada",
+        "Agregar validaciones para manejar nombres vacíos o nulos",
+        "Crear una función de prueba para verificar la funcionalidad",
+        "Realizar pruebas unitarias para cubrir diferentes escenarios de entrada",
+        "Integrar la función en el código base y realizar pruebas de integración"
+      ],
+      "tasks_review": "APROBADO",
+      "tasks_approved": true,
+      "tasks_attempts": 2,
+      "code": "```javascript\n// Función para generar saludo\nfunction generarSaludo(nombre) {\n    if (!nombre) {\n        throw new Error(\"El nombre no puede ser vacío o nulo\");\n    }\n    const saludo = `Hola, ${nombre}!`;\n    return saludo;\n}\n\n// Función de prueba\nfunction probarGenerarSaludo() {\n    try {\n        console.log(generarSaludo(\"Juan\")); // Debe imprimir \"Hola, Juan!\"\n        console.log(generarSaludo(\"\")); // Debe lanzar un error\n    } catch (error) {\n        console.error(error.message); // Debe imprimir \"El nombre no puede ser vacío o nulo\"\n    }\n}\n\n// Pruebas unitarias\nfunction probarUnitario() {\n    try {\n        generarSaludo(null); // Debe lanzar un error\n    } catch (error) {\n        console.error(error.message); // Debe imprimir \"El nombre no puede ser vacío o nulo\"\n    }\n\n    try {\n        generarSaludo(undefined); // Debe lanzar un error\n    } catch (error) {\n        console.error(error.message); // Debe imprimir \"El nombre no puede ser vacío o nulo\"\n    }\n\n    try {\n        generarSaludo(\"Maria\"); // Debe imprimir \"Hola, Maria!\"\n        console.log(generarSaludo(\"Maria\")); // Debe imprimir \"Hola, Maria!\"\n    } catch (error) {\n        console.error(error.message);\n    }\n}\n\n// Integración y pruebas de integración\nfunction integrarYProbar() {\n    const nombres = [\"Pedro\", \"Ana\", \"Luis\"];\n    nombres.forEach((nombre) => {\n        try {\n            console.log(generarSaludo(nombre)); // Debe imprimir saludos con cada nombre\n        } catch (error) {\n            console.error(error.message);\n        }\n    });\n}\n\n// Ejecutar pruebas\nprobarGenerarSaludo();\nprobarUnitario();\nintegrarYProbar();\n```",
+      "review": "APROBADO",
+      "approved": true,
+      "review_attempts": 4,
+      "tests": "import { generarSaludo } from './solution';\n\ndescribe('generarSaludo', () => {\n    it('debe generar un saludo con el nombre incluido', () => {\n        // Task: Definir la función con su nombre y parámetros de entrada\n        // Task: Crear una variable para almacenar el saludo con el nombre incluido\n        // Task: Implementar la lógica para concatenar el saludo con el nombre de entrada\n        expect(generarSaludo(\"Juan\")).toBe(\"Hola, Juan!\");\n    });\n\n    it('debe lanzar un error si el nombre es vacío', () => {\n        // Task: Agregar validaciones para manejar nombres vacíos o nulos\n        expect(() => generarSaludo(\"\")).toThrow(\"El nombre no puede ser vacío o nulo\");\n    });\n\n    it('debe lanzar un error si el nombre es nulo', () => {\n        // Task: Agregar validaciones para manejar nombres vacíos o nulos\n        expect(() => generarSaludo(null)).toThrow(\"El nombre no puede ser vacío o nulo\");\n    });\n\n    it('debe lanzar un error si el nombre es undefined', () => {\n        // Task: Agregar validaciones para manejar nombres vacíos o nulos\n        expect(() => generarSaludo(undefined)).toThrow(\"El nombre no puede ser vacío o nulo\");\n    });\n\n    it('debe generar saludos con diferentes nombres', () => {\n        // Task: Crear una función de prueba para verificar la funcionalidad\n        expect(generarSaludo(\"Maria\")).toBe(\"Hola, Maria!\");\n        expect(generarSaludo(\"Pedro\")).toBe(\"Hola, Pedro!\");\n    });\n\n    it('debe integrar la función en el código base y realizar pruebas de integración', () => {\n        // Task: Integrar la función en el código base y realizar pruebas de integración\n        const nombres = [\"Ana\", \"Luis\", \"Sofia\"];\n        nombres.forEach((nombre) => {\n            expect(generarSaludo(nombre)).toBe(`Hola, ${nombre}!`);\n        });\n    });\n});",
+      "tests_passed": true,
+      "tests_output": "\n> express-server@1.0.0 test\n> jest\n\nPASS ./solution.test.ts\n  generarSaludo\n    √ debe generar un saludo con el nombre incluido (3 ms)\n    √ debe lanzar un error si el nombre es vac�o (17 ms)\n    √ debe lanzar un error si el nombre es nulo (1 ms)\n    √ debe lanzar un error si el nombre es undefined (1 ms)\n    √ debe generar saludos con diferentes nombres\n    √ debe integrar la funci�n en el c�digo base y realizar pruebas de integraci�n (1 ms)\n\nTest Suites: 1 passed, 1 total\nTests:       6 passed, 6 total\nSnapshots:   0 total\nTime:        2.309 s\nRan all test suites.\n",
+      "qa_attempts": 3,
+      "server_path": "C:\\dev\\temp\\pipa\\server.ts",
+      "deployed": true,
+      "status": "completed"
+    }
+  ]
+}
