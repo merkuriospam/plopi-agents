@@ -19,16 +19,24 @@ def qa_agent(ticket: Ticket) -> Ticket:
     import sys
     print("[QA] Iniciando...", file=sys.stderr, flush=True)
     
+    tasks_context = "\n".join(f"- {t}" for t in ticket['tasks'])
+    
     prompt = f"""
-Sos un QA engineer. Dado este código TypeScript:
+Sos un QA engineer experto. Dado este código TypeScript:
 
 {ticket['code']}
 
 Story: {ticket['story']}
 
+Tasks que debe cumplir:
+{tasks_context}
+
 Generá dos bloques de código separados:
-1. El código fuente en TypeScript (sin imports de jest)
+1. El código fuente en TypeScript (sin imports de jest, limpio y listo para producción)
 2. Los tests con jest (importando desde ./solution)
+
+IMPORTANTE: Cada test case debe validar que se cumple una o más tasks específicas.
+Incluye comentarios en los tests referenciando qué task valida cada test (ej: // Task: Implementar función factorial).
 
 Usá bloques ```typescript para cada uno, en ese orden.
 """
@@ -58,7 +66,7 @@ Usá bloques ```typescript para cada uno, en ese orden.
         capture_output=True,
         text=True,
         shell=True,
-        timeout=30,
+        timeout=120,  # Aumentado a 120 segundos para jest + ts-jest compilation
         encoding="utf-8",
         errors="replace"
     )
