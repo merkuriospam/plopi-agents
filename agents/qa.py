@@ -19,6 +19,12 @@ def qa_agent(ticket: Ticket) -> Ticket:
     import sys
     print("[QA] Iniciando...", file=sys.stderr, flush=True)
     
+    # Obtener sandbox path del ticket
+    sandbox = ticket.get("sandbox_path", os.getenv("TS_SANDBOX_PATH", "C:\\dev\\temp\\pipa"))
+    
+    # Crear directorio si no existe
+    os.makedirs(sandbox, exist_ok=True)
+    
     tasks_context = "\n".join(f"- {t}" for t in ticket['tasks'])
     
     prompt = f"""
@@ -52,17 +58,29 @@ Usá bloques ```typescript para cada uno, en ese orden.
     solution_code = blocks[0].strip()
     test_code = blocks[1].strip()
     test_code = blocks[1].strip().replace("toThrowError", "toThrow")
+    
+    # Asegurar que el código de solución tenga exports
+    # Detectar si falta export al final
+    if "export" not in solution_code:
+        # Extraer el nombre de la función principal (primer 'function' o 'const')
+        import re as regex_module
+        func_match = regex_module.search(r'(?:export\s+)?(?:function|const)\s+(\w+)', solution_code)
+        if func_match:
+            func_name = func_match.group(1)
+            # Agregar export al final si no existe
+            if not solution_code.strip().endswith(f"export {{ {func_name} }};"):
+                solution_code = solution_code.rstrip() + f"\n\nexport {{ {func_name} }};"
 
     print("[QA] Escribiendo archivos...", file=sys.stderr, flush=True)
-    with open(os.path.join(SANDBOX, "solution.ts"), "w") as f:
+    with open(os.path.join(sandbox, "solution.ts"), "w") as f:
         f.write(solution_code)
-    with open(os.path.join(SANDBOX, "solution.test.ts"), "w") as f:
+    with open(os.path.join(sandbox, "solution.test.ts"), "w") as f:
         f.write(test_code)
 
     print("[QA] Ejecutando tests (npm test)...", file=sys.stderr, flush=True)
     result = subprocess.run(
         ["npm", "test"],
-        cwd=SANDBOX,
+        cwd=sandbox,
         capture_output=True,
         text=True,
         shell=True,

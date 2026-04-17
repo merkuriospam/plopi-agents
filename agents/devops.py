@@ -17,6 +17,12 @@ def devops_agent(ticket: Ticket) -> Ticket:
     import sys
     print("[DEVOPS] Iniciando generación de servidor...", file=sys.stderr, flush=True)
     
+    # Obtener sandbox path del ticket
+    sandbox = ticket.get("sandbox_path", os.getenv("TS_SANDBOX_PATH", "C:\\dev\\temp\\pipa"))
+    
+    # Crear directorio si no existe
+    os.makedirs(sandbox, exist_ok=True)
+    
     prompt = f"""
 Sos un DevOps engineer. Dado este código TypeScript:
 
@@ -36,7 +42,7 @@ Devolvé solo el código del server, sin explicaciones, sin bloques markdown.
     print("[DEVOPS] LLM respondió, extrayendo código...", file=sys.stderr, flush=True)
     server_code = extract_code(response.content)
 
-    path = os.path.join(SANDBOX, "server.ts")
+    path = os.path.join(sandbox, "server.ts")
     print(f"[DEVOPS] Escribiendo servidor en {path}...", file=sys.stderr, flush=True)
     with open(path, "w") as f:
         f.write(server_code)

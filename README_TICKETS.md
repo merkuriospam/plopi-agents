@@ -32,6 +32,7 @@ El archivo `tickets.json` debe contener un array de tickets con esta estructura:
       "qa_attempts": 0,
       "server_path": null,
       "deployed": false,
+      "sandbox_path": "C:\\dev\\temp\\pipa\\ticket_1",
       "status": "pending"
     }
   ]
@@ -57,6 +58,7 @@ El archivo `tickets.json` debe contener un array de tickets con esta estructura:
 | `qa_attempts` | int | Contador de reintentos (máx 3) |
 | `server_path` | string | Ruta donde se guardó el servidor |
 | `deployed` | bool | Si el servidor fue generado |
+| `sandbox_path` | string | **NUEVO**: Path único del sandbox para este ticket |
 | `status` | string | Estado final: "pending", "completed", "failed", "error" |
 
 ## Cómo Usar

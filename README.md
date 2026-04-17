@@ -34,6 +34,34 @@ Story (JSON)
 [Output] → Ticket completado con todo actualizado en JSON
 ```
 
+### 📁 Sandbox Separados por Ticket
+
+Cada ticket genera su solución en un directorio único dentro de TS_SANDBOX_PATH:
+
+```
+TS_SANDBOX_PATH (default: C:\dev\temp\pipa)
+├── node_modules/               (dependencias compartidas)
+├── ticket_1/                   (solución ticket #1)
+│   ├── solution.ts             (código generado)
+│   ├── solution.test.ts        (tests generados)
+│   └── server.ts               (servidor Express)
+├── ticket_2/                   (solución ticket #2)
+│   ├── solution.ts
+│   ├── solution.test.ts
+│   └── server.ts
+└── ticket_N/                   (solución ticket #N)
+    ├── solution.ts
+    ├── solution.test.ts
+    └── server.ts
+```
+
+**Ventajas:**
+- ✅ No hay conflictos entre soluciones de diferentes tickets
+- ✅ Cada ticket es completamente independiente
+- ✅ Fácil de debuggear, testear y auditar
+- ✅ El path se guarda en `tickets.json` para trazabilidad completa
+- ✅ Tests de diferentes tickets se ejecutan sin interferencias
+
 ## 📁 Estructura del Proyecto
 
 ```

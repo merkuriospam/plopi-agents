@@ -17,3 +17,4 @@ class Ticket(TypedDict):
     qa_attempts: int                  # contador de reintentos de QA
     server_path: Optional[str]        # ruta del servidor generado por DevOps
     deployed: Optional[bool]          # si el servidor fue deployado
+    sandbox_path: str                 # ruta de sandbox unique para este ticket

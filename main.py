@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 import sys
+import os
 import json
 from langgraph.graph import StateGraph, END
 from models.ticket import Ticket
@@ -140,6 +141,9 @@ for idx, ticket_data in enumerate(tickets, 1):
     print(f"{'='*60}\n")
     
     # Construir ticket completo con valores por defecto
+    base_sandbox = os.getenv("TS_SANDBOX_PATH", "C:\\dev\\temp\\pipa")
+    ticket_sandbox = os.path.join(base_sandbox, f"ticket_{idx}")
+    
     ticket: Ticket = {
         "story": ticket_data.get("story", ""),
         "tasks": ticket_data.get("tasks", []),
@@ -156,6 +160,7 @@ for idx, ticket_data in enumerate(tickets, 1):
         "qa_attempts": ticket_data.get("qa_attempts", 0),
         "server_path": ticket_data.get("server_path"),
         "deployed": ticket_data.get("deployed", False),
+        "sandbox_path": ticket_data.get("sandbox_path", ticket_sandbox),
     }
     
     try:
@@ -177,6 +182,7 @@ for idx, ticket_data in enumerate(tickets, 1):
             "qa_attempts": result.get("qa_attempts", 0),
             "server_path": result.get("server_path"),
             "deployed": result.get("deployed", False),
+            "sandbox_path": result.get("sandbox_path"),
             "status": "completed" if result.get("tests_passed") else "failed"
         })
         
